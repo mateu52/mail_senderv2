@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router , Link, Routes, Route } from "react-router-dom";
-//import "./App.scss";
+import "./App.css"
 import api from "./component/api";
 import Menu from "./component/Menu";
 import SubscribersList from "./component/SubscribersList";
@@ -13,17 +13,17 @@ function returnApp({users}){
   return(
     <Router>
         <nav>
-          <p>Subskrypcja</p>
-          <p><Link to="/">Główna</Link></p>
-          <p><Link to="/Subscribers">Lista Subskrybentów</Link></p>
-          <p><Link to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
-          <p><Link to="/AddCampaign">Dodaj kampanie</Link></p>
-          <p><Link to="/Campaign">Kampanie</Link></p>
+          <p className="titleR">Subskrypcja mailowa - kampanie</p>
+          <p className="linkR"><Link style={{ textDecoration: 'none' }} to="/">Główna</Link></p>
+          <p className="linkR"><Link style={{ textDecoration: 'none' }} to="/Subscribers">Lista Subskrybentów</Link></p>
+          <p className="linkR"><Link style={{ textDecoration: 'none' }} to="/AddSubscribers">Formularz zgłoszeniowy</Link></p>
+          <p className="linkR"><Link style={{ textDecoration: 'none' }} to="/AddCampaign">Dodaj kampanie</Link></p>
+          <p className="linkR"><Link style={{ textDecoration: 'none' }} to="/Campaign">Kampanie</Link></p>
         </nav>
         <Routes>
             <Route path="/" element={<Menu />} />
             <Route path="/Subscribers" element={<SubscribersList users={users} />} />
-            <Route path="/AddSubscribers" element={<AddSubscriber users={users} />} />
+            <Route path="/AddSubscribers" element={<AddSubscriber />} />
             <Route path="/AddCampaign" element={<NewCampaign users={users}/>} />
             <Route path="/Campaign" element={<Campaign  />} />
             <Route path="/Subscribers/SubscriberDetailInfo/:id" element={<SubDetailInfo users={users}/>} />
@@ -35,11 +35,11 @@ function App() {
   const [ users, setUsers] = useState([]);
   const [ promp, setPrompt ] = useState();
   //const [ openapp, setOpenapp ] = useState(false);
-  var promalert;
+  //var promalert;
   
   useEffect(() => {
-          promalert = prompt("haslo? ");
-          setPrompt(promalert);
+          //promalert = prompt("haslo? ");
+          setPrompt("szkola");
           //Info(promalert={promalert});
           api.get('/Subscribers')
           .then(data => setUsers(data.records))
@@ -48,14 +48,13 @@ function App() {
   function checkAnsw({promp}){
     console.log(promp)
     return(
-      (promp==="szkola") ? returnApp({users}) : <div><h1>bledne haslo</h1></div>
+      (promp==="szkola") ? returnApp({users}) : returnApp({users})
       )
   }
   checkAnsw({promp});
   //Info({promalert});
   return (
     <div>
-    <h1>heel</h1>
       {checkAnsw({promp})}
     </div>
   );

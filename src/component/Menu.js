@@ -1,10 +1,10 @@
 import React from 'react';
-
+import "../App.css"
 const Menu = () => {
     
     return(
-        <div>
-            <h3>Menu</h3>
+        <div className='menuR'>
+            <h3>wybierz opcje z menu</h3>
         </div>
     )
 }

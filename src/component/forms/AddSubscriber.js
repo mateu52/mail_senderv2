@@ -1,9 +1,8 @@
 import React, {  useState } from 'react';
 import api from "../api";
 import PropTypes from 'prop-types'
-const AddSubscriber = ( {users} ) =>{
+const AddSubscriber = ( ) =>{
    
-    console.log("example");
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     let date = new Date().toDateString();
@@ -34,7 +33,7 @@ const AddSubscriber = ( {users} ) =>{
         
     }
     return(
-        <div>
+        <div className='listaR'>
             <form onSubmit={handleSubmit}>
                 <label>Imie: 
                     <input 
@@ -43,7 +42,9 @@ const AddSubscriber = ( {users} ) =>{
                         placeholder="Name"
                         onChange={handleClick} 
                     />
-                <input 
+                </label>
+                <label>Email:
+                    <input 
                         name="email"
                         type="text" 
                         placeholder="email"

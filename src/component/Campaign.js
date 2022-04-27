@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 function Campaign(){
   const [camps, setCamps] = useState([]);
   
@@ -16,7 +15,6 @@ function Campaign(){
           Authorization: `Bearer ${REACT_APP_API_KEY}`,
         }
       }
-      //wyswietli to co apiConfiffg.subsList: (https://api.airtable.com/v0/appNxuSuA6IZuPplU/Subscribers?maxRecords=3&view=Subscribers)
       const response = await fetch(apiConfig.subsList, requestConfig);
       const responseData = await response.json();
       const data = [];
@@ -30,37 +28,26 @@ function Campaign(){
         });
       });
 
-      
       setCamps(data);
+      
     }
     useEffect(() => {
       fetchSubscribers();
     }, []);
 
-      
-    console.log(camps);
-       
     return(
-      <div>
+      <div className='listaR'>
         <h1>Kampanie: </h1>
-        
-
-
         {camps && camps.map((sub) =>
           <div key={sub.id}>
-              
               <h3>Tytuł: {sub.subject}  </h3>
               <h4>treść:</h4>
               <p>{sub.content}</p>
               <h2>_________ _________ __________________ __________________ __________ ________</h2>
               <br></br><br></br>
             </div>
-          
-      )}
-      
-            
+      )} 
       </div>
-
     )
 }
   

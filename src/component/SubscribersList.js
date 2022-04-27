@@ -4,16 +4,13 @@ import React from 'react';
 import SubscriberDetail from './SubscriberDetail';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-
+import "../App.css"
 function SubscribersList({users}){
-  console.log("Cześć")
-
   return (
-    <div>
+    <div className='listaR'>
       {console.log(users)}
       {console.log(users.id)}
       {users.map((user) => (
-        
           <div key={user.id}>
             <Link to={`SubscriberDetailInfo/${user.id}`}>
               <SubscriberDetail
@@ -23,8 +20,6 @@ function SubscribersList({users}){
             </Link>
           </div>
       ))}
-      <h1>hello1</h1>
-      {console.log("Cześć")}
     </div>
   )
   

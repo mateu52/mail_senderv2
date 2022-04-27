@@ -4,16 +4,12 @@ import {useForm} from "react-hook-form";
 import emailjs from '@emailjs/browser';
 import PropTypes from 'prop-types';
 function NewCampaign({users}){
-    //require('dotenv').config();
     const {register, handleSubmit, formState:{errors} } = useForm();
     const [campDraft, setDraft] =useState();
     const [campSent, setSent ] =useState();
     const [subs, setSubs ] = useState();
     const [ allSubdata , setallSubdata ] = useState();
     const [ mailTosend, setMailtosend] = useState([]);
-    let one = 0;
-    let two = 0;
-    let ilosci = 0;
     //////////////////////////////////////////////////////////////////
     function Alls(name){
         var XYZ= [];
@@ -26,31 +22,21 @@ function NewCampaign({users}){
                 ABC.push(user.id);
                 oneMail.push(user.fields.email);
                 moreMails.push(user.fields.email);
-                console.log("hello",XYZ);
-                one+=1;
-                two+=1;
             }
             else{
                 ABC.push(user.id);
                 moreMails.push(user.fields.email);
-                console.log("hej",XYZ);
-                two+=1;
             }
             return XYZ;
         })
         if (XYZ.length>0){
             setallSubdata(XYZ);
             setMailtosend(oneMail);
-            ilosci=one;
         }
         else{
             setallSubdata(ABC);
             setMailtosend(moreMails);
-            ilosci=two;
         }
-        
-        console.log("1",XYZ, "2",ABC);
-
     }
     //////////////////////////////////////////////////
     const handleDraft = data => {
@@ -90,7 +76,6 @@ function NewCampaign({users}){
         console.log(campSent);
         api.post('/Campaign',campSent);
         Alls(data.name);
-        console.log("3",ilosci, one, two);
         var finded = false;
         users.map((user)=>{
             if(user.fields.name===data.name){
@@ -119,11 +104,11 @@ function NewCampaign({users}){
     }
 ///////////////////////////////////////////////////////////////////////////////////////////
     return(
-        <form>
+        <form className='listaR'>
             <h3>tytuł maila</h3>
                 <input {...register("subject", {required:true})} />
                 {errors.subject && <span>This field is required</span>}
-            <h3>aaTwoje imię</h3>
+            <h3>Twoje imię</h3>
                 <input 
                     placeholder={"podaj imię "}
                     {...register("name", {required:true})} />
