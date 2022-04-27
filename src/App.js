@@ -34,13 +34,11 @@ function returnApp({users}){
 function App() {
   const [ users, setUsers] = useState([]);
   const [ promp, setPrompt ] = useState();
-  //const [ openapp, setOpenapp ] = useState(false);
-  //var promalert;
+  var promalert;
   
   useEffect(() => {
-          //promalert = prompt("haslo? ");
-          setPrompt("szkola");
-          //Info(promalert={promalert});
+          promalert = prompt("haslo? ");
+          setPrompt(promalert);
           api.get('/Subscribers')
           .then(data => setUsers(data.records))
           .catch(error => console.log(error))
@@ -48,8 +46,8 @@ function App() {
   function checkAnsw({promp}){
     console.log(promp)
     return(
-      (promp==="szkola") ? returnApp({users}) : returnApp({users})
-      )
+      (promp==="szkola") ? returnApp({users}) : <div><h1>bledne hasło, odśwież strone</h1></div>)
+      
   }
   checkAnsw({promp});
   //Info({promalert});
